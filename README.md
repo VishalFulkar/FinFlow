@@ -4,6 +4,8 @@ A modern, full-stack **MERN (MongoDB, Express, React, Node.js)** personal financ
 
 It provides users with deep insights into their wealth progression, interactive charts, and secure transaction tracking with absolute privacy through robust database-level isolation.
 
+[![FinFlow_Preview](https://ik.imagekit.io/VishalFulkar/FinFlow/image.png?updatedAt=1780313775487)](https://ik.imagekit.io/VishalFulkar/FinFlow/image.png?updatedAt=1780313775487)
+
 ---
 
 ## 🌟 Key Features
