@@ -10,17 +10,27 @@ import TransactionSection from './pages/TransactionSection';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
+// ── Loading Screen Component ────────────────────────────────────────────────
+const LoadingScreen = () => {
+  return (
+    <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center gap-4 text-center px-4 font-sans">
+      <div className="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+      <div className="space-y-1">
+        <h3 className="text-white font-bold text-base tracking-wide">Connecting to FinFlow...</h3>
+        <p className="text-slate-400 text-xs max-w-xs leading-relaxed animate-pulse">
+          Waking up our backend server on Render. This may take up to a minute on the first load. Thank you for your patience!
+        </p>
+      </div>
+    </div>
+  );
+};
+
 // ── Protected Route wrapper ──────────────────────────────────────────────────
 const ProtectedRoute = ({ children }) => {
   const { user, initialized } = useSelector(state => state.auth);
 
   if (!initialized) {
-    // Still checking cookie — show nothing to avoid flash to /login
-    return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-        <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   return user ? children : <Navigate to="/login" replace />;
@@ -29,7 +39,9 @@ const ProtectedRoute = ({ children }) => {
 // ── Auth Route wrapper (redirect to / if already logged in) ──────────────────
 const AuthRoute = ({ children }) => {
   const { user, initialized } = useSelector(state => state.auth);
-  if (!initialized) return null;
+  if (!initialized) {
+    return <LoadingScreen />;
+  }
   return user ? <Navigate to="/" replace /> : children;
 };
 
